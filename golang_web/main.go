@@ -6,13 +6,15 @@ import (
 	"net/http"
 )
 
-func main() {
-	// Declare a new router
+// creates a new routes with handle 'hello'
+func newRouter() *mux.Router {
 	r := mux.NewRouter()
-	// This is where the router is useful, it allows us to declare methods that
-	// this path will be valid for
 	r.HandleFunc("/hello", handler).Methods("GET")
+	return r
+}
 
+func main() {
+	r := newRouter()
 	// We can then pass our router (after declaring all our routes) to this method
 	// (where previously, we were leaving the secodn argument as nil)
 	http.ListenAndServe(":8080", r)
